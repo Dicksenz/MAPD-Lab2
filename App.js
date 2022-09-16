@@ -25,15 +25,16 @@ export default function App() {
   };
   return (
     <View style={[styles.container, { backgroundColor: theme }]}>
+      // Task 1
       <TextInput
         style={styles.input}
         onChangeText={(value) => setText(value)}
         value={text}
       />
       <Text>{text}</Text>
-
+      // Task 2
       <Button color="blue" title="Clear" onPress={() => setText("")} />
-
+      // Task 3
       <Switch
         trackColor={{ false: "white", true: "green" }}
         thumbColor={isEnabled ? "white" : "white"}
