@@ -1,11 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import {
+  Button,
+  StyleSheet,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
+  const [text, setText] = React.useState("Placeholder");
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const [theme, setTheme] = React.useState("white");
+  const toggleSwitch = (previousState) => {
+    setIsEnabled((previousState) => !previousState);
+
+    if (previousState) {
+      setTheme("black");
+      console.log("black");
+    } else {
+      setTheme("white");
+      console.log("white");
+    }
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={[styles.container, { backgroundColor: theme }]}>
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => setText(value)}
+        value={text}
+      />
+      <Text>{text}</Text>
+
+      <Button color="blue" title="Clear" onPress={() => setText("")} />
+
+      <Switch
+        trackColor={{ false: "white", true: "green" }}
+        thumbColor={isEnabled ? "white" : "white"}
+        ios_backgroundColor="grey"
+        onValueChange={(value) => toggleSwitch(value)}
+        value={isEnabled}
+      />
     </View>
   );
 }
@@ -13,8 +48,25 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  textStyle: {
+    fontSize: 20.0,
+    color: "black",
+    borderWidth: 3,
+    borderColor: "red",
+  },
+
+  input: {
+    width: "90%",
+    borderWidth: 1,
+    padding: 10,
+  },
+  buttonStyle: {
+    backgroundColor: "blue",
   },
 });
